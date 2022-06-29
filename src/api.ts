@@ -17,7 +17,7 @@ export const myFetch = async (
     if(res.status >= 300) {
         throw new Error('network error');
     }
-    return res.json();
+    return await res.json();
 }
 
 export const getTodos = () => myFetch(); // fetch(BASE_URL).then(res => res.json());
