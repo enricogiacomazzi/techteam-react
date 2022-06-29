@@ -1,0 +1,30 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "text": "fare la spesa",
+      "completed": true
+    },
+    {
+      "id": 4,
+      "text": "ciao 3",
+      "completed": true
+    }
+  ],
+  "users": [
+    {
+      "firstname": "pippo",
+      "lastname": "verdi",
+      "age": 44,
+      "id": 1
+    },
+    {
+      "firstname": "pluto",
+      "lastname": "verdi",
+      "age": 66,
+      "id": 2
+    }
+  ],
+  "posts": [],
+  "plants": []
+}

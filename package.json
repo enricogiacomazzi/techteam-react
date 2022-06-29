@@ -10,6 +10,9 @@
     "@types/node": "^16.11.41",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "bootstrap": "^5.1.3",
+    "font-awesome": "^4.7.0",
+    "immer": "^9.0.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -20,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:server": "json-server --watch -p 4000 ./server/db.json",
+    "start:all": "concurrently \"npm:start\" \"npm:start:server\""
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +44,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "json-server": "^0.17.0",
+    "concurrently": "^7.2.2"
   }
 }

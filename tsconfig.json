@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "development.env.js"  ]
 }
