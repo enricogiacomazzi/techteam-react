@@ -21,12 +21,19 @@ export const myFetch = async (
     return await res.json();
 }
 
-export const getTodos = () => axios.get<Array<TodoItem>>(BASE_URL).then(r => {
-    console.log('getTodos', r.data);
-    return  r.data;
+const wait = (time: number) => new Promise((res, rej) => {
+    setTimeout(() => { res(null)}, time);
+  })
+
+export const getTodos = (completed: boolean = false) => axios.get<Array<TodoItem>>(BASE_URL).then(r => {
+    // console.log('getTodos', r.data);
+    return completed ? r.data.filter(i => i.completed) : r.data;
 });
-export const addTodo = (todo: Omit<TodoItem, 'id'>) => 
-    axios.post<Omit<TodoItem, 'id'>, AxiosResponse<TodoItem>>(BASE_URL, todo).then(r => r.data);
+export const addTodo = async (todo: Omit<TodoItem, 'id'>) => {
+    const res = await axios.post<Omit<TodoItem, 'id'>, AxiosResponse<TodoItem>>(BASE_URL, todo);
+    await wait(2000);
+    return res.data;
+}
 
 // export const getTodos = () => myFetch(); // fetch(BASE_URL).then(res => res.json());
 export const getTodoById = (id: number) => fetch(BASE_URL + '/' + id).then(res => res.json());

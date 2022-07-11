@@ -1,10 +1,12 @@
 import React, { FormEvent, useRef } from 'react';
 
 interface AddTodoProps {
-    onAdd: (text: string) => void
+    onAdd: (text: string) => void,
+    addError: boolean;
+    isLoading: boolean;
 }
 
-export const AddTodo: React.FC<AddTodoProps> = ({onAdd}) => {
+export const AddTodo: React.FC<AddTodoProps> = ({onAdd, addError, isLoading}) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const addTodo = (e: FormEvent) => {
@@ -18,8 +20,10 @@ export const AddTodo: React.FC<AddTodoProps> = ({onAdd}) => {
 
     return (
         <form onSubmit={addTodo}>
-            <input type="text" ref={inputRef}/>
-            <input type="submit" value="Aggiungi"/>
+            {addError && <span style={{backgroundColor: 'red'}}>Errore inserimento</span>}
+            <input type="text" ref={inputRef} disabled={isLoading}/>
+            <input type="submit" value="Aggiungi" disabled={isLoading}/>
+            {isLoading && <span>loading....</span>}
         </form>
     )
 }
