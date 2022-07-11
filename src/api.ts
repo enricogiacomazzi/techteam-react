@@ -1,5 +1,6 @@
 import { BASE_URL } from "./constants";
 import { TodoItem } from "./models/TodoItem.model";
+import axios, { AxiosResponse } from "axios";
 
 export const myFetch = async (
     method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' = 'GET', 
@@ -20,9 +21,16 @@ export const myFetch = async (
     return await res.json();
 }
 
-export const getTodos = () => myFetch(); // fetch(BASE_URL).then(res => res.json());
+export const getTodos = () => axios.get<Array<TodoItem>>(BASE_URL).then(r => {
+    console.log('getTodos', r.data);
+    return  r.data;
+});
+export const addTodo = (todo: Omit<TodoItem, 'id'>) => 
+    axios.post<Omit<TodoItem, 'id'>, AxiosResponse<TodoItem>>(BASE_URL, todo).then(r => r.data);
+
+// export const getTodos = () => myFetch(); // fetch(BASE_URL).then(res => res.json());
 export const getTodoById = (id: number) => fetch(BASE_URL + '/' + id).then(res => res.json());
-export const addTodo = (todo: Omit<TodoItem, 'id'>) => myFetch('POST', undefined, todo);
+// export const addTodo = (todo: Omit<TodoItem, 'id'>) => myFetch('POST', undefined, todo);
 export const editTodo = (todo: TodoItem) => myFetch('PUT', todo.id, todo);
 export const deleteTodo = (todo: Pick<TodoItem, 'id'>) => myFetch('DELETE', todo.id);
 //export const deleteTodo = (todo: Pick<TodoItem, 'id'>) =>  fetch(BASE_URL + '/' + todo.id, {method: 'DELETE'})
